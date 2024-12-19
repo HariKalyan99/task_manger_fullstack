@@ -1,0 +1,131 @@
+body {
+  flex: 1;
+  background: #ffffff;
+  background-image: url("https://cdna.artstation.com/p/assets/images/images/004/560/916/large/dominik-mayer-redmoon.jpg?1484594633");
+  opacity: 0.8;
+}
+
+
+h1 {
+  color: #e42639;
+  text-decoration: underline;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  min-width: 400px;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+#errorFeed {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  min-width: 400px;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+#formSubmit {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  min-width: 400px;
+  height: 500px;
+  position: fixed;
+  border-radius: 16px;
+  color: #ffffff;
+  background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 62%);
+  filter: drop-shadow(0 0 .8rem #000000);
+}
+
+#formSubmit input {
+  width: 300px;
+  height: 35px;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid rgb(255, 255, 255);
+  padding: 10px;
+  color: #e42639;
+  font-size: large;
+}
+
+#formSubmitLogin {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  min-width: 400px;
+  height: 500px;
+  position: fixed;
+  border-radius: 16px;
+  color: #ffffff;
+  background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 62%);
+  filter: drop-shadow(0 0 .8rem #000000);
+}
+
+#formSubmitLogin input {
+  width: 300px;
+  height: 35px;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid rgb(255, 255, 255);
+  padding: 10px;
+  color: #e42639;
+  font-size: large;
+}
+
+#formSubmit button {
+  width: 90px;
+  height: 40px;
+  background-color: #e42639;
+  border: none;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  font-weight: bolder;
+  border: 2px solid #ffffff;
+}
+
+#formSubmitLogin button {
+  width: 90px;
+  height: 40px;
+  background-color: #e42639;
+  border: none;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  font-weight: bolder;
+  border: 2px solid #ffffff;
+}
+
+#formSubmit button:hover {
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+#formSubmitLogin button:hover {
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.goBlogs {
+  text-decoration: underline; color: rgb(255, 255, 255); font-style: italic;
+}
+
+.goBlogs:hover {
+  color: rgb(255, 0, 0);
+}
+
+
+@media (max-width: 500px) {
+  #formSubmit {
+    min-width: 400px;
+  }
+}

@@ -1,0 +1,13 @@
+* {
+  padding: 0;margin: 0;
+}
+
+
+
+
+
+body {
+  --bs-body-bg: #000000 !important;
+  --bs-body-color: #ffffff !important;
+}
+

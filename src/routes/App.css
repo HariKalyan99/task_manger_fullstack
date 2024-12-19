@@ -1,0 +1,50 @@
+/* body { */
+    /* background-image: url('https://wallpapers.com/images/hd/blogging-backdrop-with-typewriter-xobjxvnbcdjcwt9r.jpg'); */
+    /* background-image: url('https://www.teahub.io/photos/full/20-206302_fondos-de-pantalla-minimalistas-4k.jpg'); */
+
+/* }  */
+
+/* .bg {
+    background-image: url('https://lh3.googleusercontent.com/proxy/fpiUauFKCN_PDrgpY5Y0ItbseFK9GF6fI4kHgTx74jpYel9cBj2sGiz4ZZYoCXYtOXASQ34cwDfHVtXORM3LZqlsqfdOO_v7yi5uJWQuODm4TkPxM_GNmmFKL8AH75vVuFkARJgPuKg');
+} */
+
+.img-eff {
+    opacity: 0.5;
+}
+
+.img-eff:hover {
+    opacity: 1;
+}
+
+.spanSvg {
+    color: white;
+}
+
+.spanSvg:hover {
+    color: red;
+    cursor: pointer;
+}
+
+
+.deletePost {
+    text-align: center;
+    color: rgb(199, 27, 27);
+}
+
+.deletePost:hover {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(99, 98, 98);
+    opacity: 1; /* Firefox */
+  }
+  
+  .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(99, 98, 98);
+  }
+  
+  .form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(99, 98, 98);
+  }
