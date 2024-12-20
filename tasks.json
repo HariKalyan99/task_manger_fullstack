@@ -1,0 +1,110 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "id": 1,
+            "title": "protected routes new one.",
+            "description": "standardised error responses new one.",
+            "priority": "high",
+            "dueDate": "2024-12-12T00:00:00.000Z",
+            "status": "pending",
+            "userId": 1,
+            "createdAt": "2024-12-20T12:48:57.091Z",
+            "updatedAt": "2024-12-20T12:48:57.091Z",
+            "deletedAt": null,
+            "user": {
+                "id": 1,
+                "username": "admin",
+                "email": "admin@gmail.com",
+                "password": "$2b$10$Ka1bgKGom76Le6i6p.6cPOQAEElqUMDXrYl526mQIl4sXIoGCEpG2",
+                "createdAt": "2024-12-20T12:47:27.879Z",
+                "updatedAt": "2024-12-20T12:47:27.879Z",
+                "deletedAt": null
+            }
+        },
+        {
+            "id": 2,
+            "title": "protected routes new three.",
+            "description": "standardised error responses new three.",
+            "priority": "low",
+            "dueDate": "2024-12-12T00:00:00.000Z",
+            "status": "pending",
+            "userId": 1,
+            "createdAt": "2024-12-20T12:49:30.347Z",
+            "updatedAt": "2024-12-20T12:49:30.347Z",
+            "deletedAt": null,
+            "user": {
+                "id": 1,
+                "username": "admin",
+                "email": "admin@gmail.com",
+                "password": "$2b$10$Ka1bgKGom76Le6i6p.6cPOQAEElqUMDXrYl526mQIl4sXIoGCEpG2",
+                "createdAt": "2024-12-20T12:47:27.879Z",
+                "updatedAt": "2024-12-20T12:47:27.879Z",
+                "deletedAt": null
+            }
+        },
+        {
+            "id": 3,
+            "title": "protected routes new four.",
+            "description": "standardised error responses new four.",
+            "priority": "low",
+            "dueDate": "2024-12-12T00:00:00.000Z",
+            "status": "pending",
+            "userId": 1,
+            "createdAt": "2024-12-20T12:49:37.115Z",
+            "updatedAt": "2024-12-20T12:49:37.115Z",
+            "deletedAt": null,
+            "user": {
+                "id": 1,
+                "username": "admin",
+                "email": "admin@gmail.com",
+                "password": "$2b$10$Ka1bgKGom76Le6i6p.6cPOQAEElqUMDXrYl526mQIl4sXIoGCEpG2",
+                "createdAt": "2024-12-20T12:47:27.879Z",
+                "updatedAt": "2024-12-20T12:47:27.879Z",
+                "deletedAt": null
+            }
+        },
+        {
+            "id": 4,
+            "title": "protected routes new five.",
+            "description": "standardised error responses new five.",
+            "priority": "high",
+            "dueDate": "2024-12-12T00:00:00.000Z",
+            "status": "pending",
+            "userId": 1,
+            "createdAt": "2024-12-20T12:50:41.014Z",
+            "updatedAt": "2024-12-20T12:50:41.014Z",
+            "deletedAt": null,
+            "user": {
+                "id": 1,
+                "username": "admin",
+                "email": "admin@gmail.com",
+                "password": "$2b$10$Ka1bgKGom76Le6i6p.6cPOQAEElqUMDXrYl526mQIl4sXIoGCEpG2",
+                "createdAt": "2024-12-20T12:47:27.879Z",
+                "updatedAt": "2024-12-20T12:47:27.879Z",
+                "deletedAt": null
+            }
+        },
+        {
+            "id": 5,
+            "title": "protected routes new six.",
+            "description": "standardised error responses new six.",
+            "priority": "high",
+            "dueDate": "2024-12-12T00:00:00.000Z",
+            "status": "completed",
+            "userId": 1,
+            "createdAt": "2024-12-20T12:50:59.242Z",
+            "updatedAt": "2024-12-20T12:50:59.242Z",
+            "deletedAt": null,
+            "user": {
+                "id": 1,
+                "username": "admin",
+                "email": "admin@gmail.com",
+                "password": "$2b$10$Ka1bgKGom76Le6i6p.6cPOQAEElqUMDXrYl526mQIl4sXIoGCEpG2",
+                "createdAt": "2024-12-20T12:47:27.879Z",
+                "updatedAt": "2024-12-20T12:47:27.879Z",
+                "deletedAt": null
+            }
+        }
+    ]
+}

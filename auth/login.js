@@ -1,40 +1,38 @@
 let formLogin = document.querySelector("#formSubmitLogin");
-let userNameLogin = document.querySelector("#usernameLogin");
+let emailLogin = document.querySelector("#emailLogin");
 let passwordLogin = document.querySelector("#passwordLogin");
 
-let token = localStorage.getItem("token");
-if(token){
+
     formLogin.addEventListener("submit", (event) => {
         event.preventDefault();
         if (
-          userNameLogin.value === "kminchelle" &&
-          passwordLogin.value === "0lelplR"
+          emailLogin.value &&
+          passwordLogin.value
         ) {
           
-          loginUser(token);
+          loginUser(email = emailLogin.value, password = passwordLogin.value);
         } else {
           alert("Invalid username and password");
         }
       });
       
-      function loginUser(token) {
+      function loginUser(email, password) {
         try {
-          fetch("https://dummyjson.com/auth/me", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          fetch("https://personal-task-manager-api-vu5e.onrender.com/api/v1/auth/login", {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                password,
+                email
+            })
         })
           .then((res) => res.json())
           .then((data) => {
-            localStorage.setItem("username", data.firstName);
+            localStorage.setItem("user", JSON.stringify({user: data.user, token: data.token}));
             window.location.href = "mainpage.html";
           });
         }catch(err){
           console.log("Error", err);
         }
       }
-}else {
-    document.querySelector('#errorFeed').innerText = "You don't have access for this page"
-}
 
