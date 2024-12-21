@@ -11,19 +11,19 @@ body {
   opacity: 0.8;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 
 h1 {
   color: #e42639;
   text-decoration: underline;
+  text-decoration-color: grey;
 }
 
 .form {
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  min-width: 400px;
+  width: 100%;
   height: 100vh;
   justify-content: center;
   align-items: center;
@@ -31,9 +31,6 @@ h1 {
 
 #errorFeed {
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  min-width: 400px;
   height: 100vh;
   justify-content: center;
   align-items: center;
@@ -41,54 +38,52 @@ h1 {
 
 #formSubmit {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  min-width: 400px;
-  height: 500px;
-  position: fixed;
-  border-radius: 16px;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  width: 350px;
   color: #ffffff;
+  border-radius: 16px;
   background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 62%);
-  filter: drop-shadow(0 0 .8rem #000000);
+  box-shadow: 5px 1px 20px rgb(0, 0, 0);
 }
 
 #formSubmit input {
   width: 300px;
-  height: 35px;
+  height: 30px;
   border: none;
   background: transparent;
   border-bottom: 1px solid rgb(255, 255, 255);
-  padding: 10px;
   color: #e42639;
   font-size: large;
+  outline: none;
 }
 
 #formSubmitLogin {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  min-width: 400px;
-  height: 500px;
-  position: fixed;
-  border-radius: 16px;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  width: 350px;
   color: #ffffff;
+  border-radius: 16px;
   background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 62%);
-  filter: drop-shadow(0 0 .8rem #000000);
+  box-shadow: 5px 1px 20px rgb(0, 0, 0);
 }
 
 #formSubmitLogin input {
   width: 300px;
-  height: 35px;
+  height: 30px;
   border: none;
   background: transparent;
   border-bottom: 1px solid rgb(255, 255, 255);
-  padding: 10px;
   color: #e42639;
   font-size: large;
+  outline: none;
 }
 
 #formSubmit button {
@@ -100,6 +95,7 @@ h1 {
   color: rgb(0, 0, 0);
   font-weight: bolder;
   border: 2px solid #ffffff;
+  margin-top: 10px;
 }
 
 #formSubmitLogin button {
@@ -111,6 +107,7 @@ h1 {
   color: rgb(0, 0, 0);
   font-weight: bolder;
   border: 2px solid #ffffff;
+  margin-top: 10px;
 }
 
 #formSubmit button:hover {
@@ -123,13 +120,6 @@ h1 {
   background-color: #ffffff;
 }
 
-.goBlogs {
-  text-decoration: underline; color: rgb(255, 255, 255); font-style: italic;
-}
-
-.goBlogs:hover {
-  color: rgb(255, 0, 0);
-}
 
 
 @media (max-width: 500px) {

@@ -1,13 +1,13 @@
 * {
-  padding: 0;margin: 0;
+  padding: 0;
+  margin: 0;
 }
-
-
-
-
 
 body {
   --bs-body-bg: #000000 !important;
   --bs-body-color: #ffffff !important;
 }
 
+.bg-complete {
+  background-color: #9B9D9E !important;
+}

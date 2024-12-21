@@ -93,20 +93,18 @@ const BlogsStoreContextProvider = ({ children }) => {
     const fetchPosts = async () => {
       setLoading(!loading);
       try {
-        console.log(token)
         const { data } = await axios.get("https://personal-task-manager-api-vu5e.onrender.com/api/v1/tasks", {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            "Authorization": `Bearer ${getToken}`
           }
         });
-        console.log(data);
-        // useCallback(dispatchPostList({
-        //   type: "INITIAL_POSTS",
-        //   payload: {
-        //     data,
-        //   },
-        // }), [dispatchPostList]);
+        useCallback(dispatchPostList({
+          type: "INITIAL_POSTS",
+          payload: {
+            data: data.data,
+          },
+        }), [dispatchPostList]);
         setLoading(!loading);
       } catch (err) {
         console.log("Error", err);
@@ -150,7 +148,12 @@ const BlogsStoreContextProvider = ({ children }) => {
   useEffect(() => {
     const delPosts = async (id) => {
       try {
-        const {data} = await axios.delete(`http://localhost:8082/posts/${id}`);
+        const {data} = await axios.delete(`https://personal-task-manager-api-vu5e.onrender.com/api/v1/tasks/${id}`,  {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${getToken}`
+          }
+        });
         setDeletedPost([...deletedPost, data]);
         useCallback(dispatchPostList({
           type: "DEL_POST",

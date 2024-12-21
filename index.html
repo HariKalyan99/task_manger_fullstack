@@ -8,25 +8,23 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div style="display: flex; justify-content: center; height: 100px; border-top-left-radius: 40px; border-bottom-right-radius: 50px; border: 1px solid black; align-items: center; background-color: rgb(0, 0, 0);">
-      <h2><a href="mainpage.html" style="color: rgb(255, 255, 255); text-decoration: none;"> Don't wanna register, <span class="goBlogs"> Go to Tron's Blogs</span > </a></h2>
-    </div>
     <div class="form">
-          <form  id="formSubmit">
-            
-            <h1>Register</h1>
-            <label for="username">Username</label>
-            <input type="text" id="username"  required/>
-            <label for="email">Email</label>
-            <input type="email" id="email"  required/>
-            <label for="password">Password</label>
-            <input type="password" id="password" required/>
-            <label for="password">Confirm Password</label>
-            <input type="password" id="confirmPassword"  required/>
-            <button type="submit">Submit</button>
-            <a href="./login.html" style="color: white;margin: 5px;">Alredy registerd? Sign in</a>
-          </form>
-        </div>
+      <form id="formSubmit">
+        <h1>Register</h1>
+        <label for="username"></label>
+        <input type="text" id="username" required placeholder="Username"/>
+        <label for="email"></label>
+        <input type="email" id="email" required placeholder="Email" />
+        <label for="password"></label>
+        <input type="password" id="password" required placeholder="Password" />
+        <label for="password"></label>
+        <input type="password" id="confirmPassword" required placeholder="Confirm Password" />
+        <button type="submit">Submit</button>
+        <a href="./login.html" style="color: white; margin: 5px"
+          >Alredy registerd? Sign in</a
+        >
+      </form>
+    </div>
 
     <script defer src="./auth/authenitication.js"></script>
   </body>
