@@ -4,7 +4,7 @@ import { BlogStore } from '../store/Blogsstore'
 const Loginaccess = () => {
   const {goback, handleLogout, getToken,getUserName } = useContext(BlogStore)
   return (
-    <div className='bg-danger'>
+    <div className='bg-danger border-bottom border-5'>
         {getToken && getUserName ? <div  style={{display: "flex", justifyContent: "space-between"}}>
           <h1>Hello {getUserName},</h1>
           <button  style={{margin: "8px", width: "100px", borderRadius: "14px", backgroundColor: 'black', color: "white", border: "none"}} onClick={handleLogout}>Logout</button>

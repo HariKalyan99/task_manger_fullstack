@@ -5,7 +5,7 @@ import { BlogStore } from "../store/Blogsstore";
 import { useNavigate } from "react-router-dom";
 
 const Createpost = () => {
-  const token = localStorage.getItem("token");
+  const {token} = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   const { addPost, switchBetween } = useContext(BlogStore);
   const [userIdRef, setuserIdRef] = useState("");
@@ -13,6 +13,7 @@ const Createpost = () => {
   const [descriptionRef, setdescriptionRef] = useState("");
   const [priorityRef, setPriorityRef] = useState("");
   const [dateRef, setdateRef] = useState("");
+  const [statusRef, setStatusRef] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,13 +21,14 @@ const Createpost = () => {
     const description = descriptionRef;
     const priority = priorityRef;
     const dueDate = dateRef;
-    console.log(title, description, priority,dueDate);
+    const status = statusRef;
+    console.log(title, description, priority,dueDate, status);
     // addPost({ userId, title, description, tags, reactions, id: uuidv4() });
     // navigate("/mainpage.html");
     // switchBetween("home");
   };
   return (
-    <div className="col g-5 d-flex bg-dark justify-content-center m-5 flex-wrap">
+    <div className="col g-5 d-flex bg-dark justify-content-center m-5 flex-wrap border border-5">
       <div className="col-sm-12 col-md-8 col-lg-5">
         <h2 className="mt-4 text-center">Create a Task</h2>
         <form className="needs-validation" onSubmit={(e) => handleSubmit(e)}>
@@ -50,6 +52,7 @@ const Createpost = () => {
           </div>
 
           <hr className="my-4" />
+          
           <h4 className="mb-3"> Description</h4>
 
           <div className="form-floating">
@@ -66,7 +69,7 @@ const Createpost = () => {
 
           <hr className="my-4" />
 
-          <div className="col-12">
+          <div className="col-8">
             <label htmlFor="username" className="form-label">
               Priority
             </label>
@@ -101,6 +104,8 @@ const Createpost = () => {
                 <option value="medium">medium</option>
                 <option value="high">high</option>
               </select>
+
+              
               {/* <input
                   type="text"
                   className="form-control"
@@ -111,8 +116,51 @@ const Createpost = () => {
                   onChange={(e) => setPriorityRef(e.target.value)}
                   readOnly={!token && true}
                 /> */}
+                
             </div>
+            
           </div>
+          
+
+          <div className="col-4 mt-2">
+            <label htmlFor="username" className="form-label">
+            Status
+            </label>
+            <div className="input-group has-validation">
+              <span
+                className="input-group-text text-bg-dark"
+                value={statusRef}
+                onChange={(e) => setStatusRef(e.target.value)}
+                readOnly={!token && true}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-bookmark-star"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.18.18 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.18.18 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.18.18 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.18.18 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.18.18 0 0 0 .134-.098z" />
+                  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                </svg>
+              </span>
+              <select
+                class="form-select"
+                id="username"
+                aria-label="Default select example"
+              >
+                <option defaultValue hidden>
+                  Select status
+                </option>
+                <option value="pending">pending</option>
+                <option value="completed">completed</option>
+              </select>
+
+            </div>
+            
+          </div>
+
           <hr className="my-4" />
           <label htmlFor="username" className="form-label">
             Due on
@@ -142,9 +190,7 @@ const Createpost = () => {
               onChange={(e) => setdateRef(e.target.value)}
               readOnly={!token && true}
             />
-            <div className="invalid-feedback">
-              Tags must be entered with ','.
-            </div>
+            
           </div>
           <hr className="my-4" />
           <button className="w-100 btn btn-danger btn-lg mb-3" type="submit">

@@ -16,12 +16,15 @@ const Post = ({ post }) => {
         />
       ) : (
         <div
-          className={`card shadow-sm ${post.status === "completed" && "border border-dark border-5"}`}
+          className={`card shadow-sm ${
+            post.status === "completed"
+              ? "border border-black border-5"
+              : "border border-white border-5"
+          }`}
         >
-          <span className="position-absolute z-2 top-0 start-50 translate-middle badge rounded bg-dark pt-2" >
+          <span className="position-absolute z-2 top-0 start-50 translate-middle badge rounded bg-black pt-2">
             {post.priority === "high" ? (
               <sup>
-                
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -64,7 +67,7 @@ const Post = ({ post }) => {
           <img
             src="https://www.socialchamp.io/wp-content/uploads/2022/06/Blog-Banner_Q2-2023_1125x600_39_How-to-Post-on-Pinterest-1.png"
             alt={post.title}
-            className={post.status === "pending" && "img-eff"}
+            className={post.status === "completed" && "img-eff"}
           />
 
           <div
@@ -76,14 +79,13 @@ const Post = ({ post }) => {
               justifyContent: "space-around",
             }}
           >
-            <h4
-              className={`card-text text-danger`}
-            >
+            <h4 className={`card-text text-danger`}>
               <span>
                 <h5
                   style={{
                     display: "inline-block",
-                    textDecoration: "underline",  textDecorationColor: "grey",
+                    textDecoration: "underline",
+                    textDecorationColor: "grey",
                     color: "white",
                   }}
                 >
@@ -114,7 +116,11 @@ const Post = ({ post }) => {
 
             <p className="card-text">
               <h5
-                style={{ display: "inline-block", textDecoration: "underline",  textDecorationColor: "grey" }}
+                style={{
+                  display: "inline-block",
+                  textDecoration: "underline",
+                  textDecorationColor: "grey",
+                }}
               >
                 Description:
               </h5>{" "}
@@ -122,14 +128,13 @@ const Post = ({ post }) => {
             </p>
             <div className="d-flex">
               <div className="d-flex gap-2 justify-content-center align-items-center">
-                <h6
-                  className={`text-light`}
-                >
+                <h6 className={`text-light`}>
                   <span>
                     <h5
                       style={{
                         display: "inline-block",
-                        textDecoration: "underline",  textDecorationColor: "grey",
+                        textDecoration: "underline",
+                        textDecorationColor: "grey",
                       }}
                     >
                       Status:
@@ -140,6 +145,7 @@ const Post = ({ post }) => {
               </div>
             </div>
 
+            <div className="d-flex justify-content-between align-items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -151,6 +157,22 @@ const Post = ({ post }) => {
             >
               <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2M6.854 8.146 8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 1 1 .708-.708" />
             </svg>
+
+            <div className="d-flex justify-content-center align-items-center gap-2">
+              <span>Mark as completed</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              fill="currentColor"
+              class="bi bi-marker-tip markPost"
+              viewBox="0 0 16 16"
+            >
+              
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5 6.064-1.281-4.696A.5.5 0 0 0 9.736 9H6.264a.5.5 0 0 0-.483.368l-1.28 4.696A6.97 6.97 0 0 0 8 15c1.275 0 2.47-.34 3.5-.936m.873-.598a7 7 0 1 0-8.746 0l1.19-4.36a1.5 1.5 0 0 1 1.31-1.1l1.155-3.851c.213-.713 1.223-.713 1.436 0l1.156 3.851a1.5 1.5 0 0 1 1.31 1.1z" />
+            </svg>
+            </div>
+            </div>
           </div>
         </div>
       )}
