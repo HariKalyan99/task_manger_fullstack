@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect, useReducer, useCallback } from "react";
 import axios from "axios";
-let token = localStorage.getItem("token");
-let userName = localStorage.getItem("username");
+let {user, token} = JSON.parse(localStorage.getItem("user"));
 
 function pureReducerFunction(currentPostList, action) {
   let newPostList = currentPostList;
@@ -58,7 +57,7 @@ export const BlogStore = createContext({
 
 const BlogsStoreContextProvider = ({ children }) => {
   const [getToken, setToken] = useState(token);
-  const [getUserName, setUserName] = useState(userName);
+  const [getUserName, setUserName] = useState(user);
 
   const [loading, setLoading] = useState(true);
 
@@ -94,13 +93,20 @@ const BlogsStoreContextProvider = ({ children }) => {
     const fetchPosts = async () => {
       setLoading(!loading);
       try {
-        const { data } = await axios.get("http://localhost:8082/posts", signal);
-        useCallback(dispatchPostList({
-          type: "INITIAL_POSTS",
-          payload: {
-            data,
-          },
-        }), [dispatchPostList]);
+        console.log(token)
+        const { data } = await axios.get("https://personal-task-manager-api-vu5e.onrender.com/api/v1/tasks", {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          }
+        });
+        console.log(data);
+        // useCallback(dispatchPostList({
+        //   type: "INITIAL_POSTS",
+        //   payload: {
+        //     data,
+        //   },
+        // }), [dispatchPostList]);
         setLoading(!loading);
       } catch (err) {
         console.log("Error", err);
