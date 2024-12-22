@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect, useReducer } from "react";
 import axios from "axios";
-let { user, token } = JSON.parse(localStorage.getItem("user"));
+import { useNavigate } from "react-router-dom";
+let token = JSON.parse(localStorage.getItem("user"));
+let user =  "hello"
 
 function pureReducerFunction(currentPostList, action) {
   let newPostList = currentPostList;
@@ -41,17 +43,17 @@ const BlogsStoreContextProvider = ({ children }) => {
   const [getUserName, setUserName] = useState(user);
 
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.clear();
     setToken("");
     setUserName("");
-    window.location.href = "../index.html";
-    window.reload();
+    navigate("/");
   };
 
   const goback = () => {
-    window.location.href = "../index.html";
+    navigate("/");
   };
 
   const [getSwitch, setSwitch] = useState("home");

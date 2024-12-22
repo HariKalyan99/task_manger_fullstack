@@ -5,27 +5,9 @@
     <link rel="icon" type="image/svg+xml" href="./src/assets/tasklogo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signup</title>
-    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="form">
-      <form id="formSubmit">
-        <h1>Register</h1>
-        <label for="username"></label>
-        <input type="text" id="username" required placeholder="Username"/>
-        <label for="email"></label>
-        <input type="email" id="email" required placeholder="Email" />
-        <label for="password"></label>
-        <input type="password" id="password" required placeholder="Password" />
-        <label for="password"></label>
-        <input type="password" id="confirmPassword" required placeholder="Confirm Password" />
-        <button type="submit">Submit</button>
-        <a href="./login.html" style="color: white; margin: 5px"
-          >Alredy registerd? Sign in</a
-        >
-      </form>
-    </div>
-
-    <script defer src="./auth/authenitication.js"></script>
+    <div id="root"></div>
+    <script type="module" src="src/main.jsx"></script>
   </body>
 </html>

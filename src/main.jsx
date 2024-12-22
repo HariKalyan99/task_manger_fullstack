@@ -7,12 +7,20 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Dashboard from './components/Dashboard.jsx';
 import Createpost from './components/Createpost.jsx';
 import App from './routes/App.jsx';
+import Signup from './routes/Signup.jsx';
+import Login from './routes/Login.jsx';
 
 const router = createBrowserRouter([
-  {path: "/mainpage.html", element: <App />, children: [{
-    path: "/mainpage.html", element: <Dashboard />
-  }, {
-    path: "/mainpage.html/create-post", element: <Createpost />
+  {path: "/", element: <App />, children: [
+    {
+      path: "/", element: <Signup />
+    },{
+      path: "/login", element: <Login />
+    },
+    {
+    path: "/dashboard", element: <Dashboard />
+  },{
+    path: "/create-task", element: <Createpost />
   }
   ]}
 ])

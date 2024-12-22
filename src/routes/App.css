@@ -8,6 +8,138 @@
     background-image: url('https://lh3.googleusercontent.com/proxy/fpiUauFKCN_PDrgpY5Y0ItbseFK9GF6fI4kHgTx74jpYel9cBj2sGiz4ZZYoCXYtOXASQ34cwDfHVtXORM3LZqlsqfdOO_v7yi5uJWQuODm4TkPxM_GNmmFKL8AH75vVuFkARJgPuKg');
 } */
 
+.body {
+    flex: 1;
+    background: #ffffff;
+    background-image:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.144)
+    ), 
+    url("https://i.pinimg.com/originals/8a/e1/04/8ae104a88d8fd8e5c4d1a9cbea4d4c96.gif");
+    opacity: 0.8;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+}
+
+.form {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #formSubmit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    width: 350px;
+    color: #ffffff;
+    border-radius: 16px;
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 62%);
+    box-shadow: 5px 1px 20px rgb(0, 0, 0);
+  }
+  
+  #formSubmit input {
+    width: 95%;
+    height: 30px;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    color: #e42639;
+    font-size: large;
+    outline: none;
+  }
+
+  #formSubmit button {
+    width: 90px;
+    height: 40px;
+    background-color: #e42639;
+    border: none;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    border: 2px solid #ffffff;
+    margin-top: 10px;
+  }
+  #formSubmit button:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+  }
+
+
+
+
+  /*  */
+
+  #errorFeed {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+  #formSubmitLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    width: 350px;
+    color: #ffffff;
+    border-radius: 16px;
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 62%);
+    box-shadow: 5px 1px 20px rgb(0, 0, 0);
+  }
+  
+  #formSubmitLogin input {
+    width: 90%;
+    height: 30px;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    color: #e42639;
+    font-size: large;
+    outline: none;
+  }
+  
+
+
+  #formSubmitLogin button {
+    width: 90px;
+    height: 40px;
+    background-color: #e42639;
+    border: none;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    border: 2px solid #ffffff;
+    margin-top: 10px;
+  }
+
+  
+#formSubmitLogin button:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+  }
+  
+
+
+.reg-heading {
+    color: #e42639;
+  text-decoration: underline;
+  text-decoration-color: grey;
+}
+
 .img-eff {
     opacity: 0.5;
 }
@@ -57,4 +189,14 @@
   
   .form-control::-ms-input-placeholder { /* Microsoft Edge */
     color: rgb(99, 98, 98);
+  }
+
+
+  @media (max-width: 500px) {
+    #formSubmit {
+      width: 300px;
+    }
+    #formSubmitLogin {
+        width: 300px;
+    }
   }

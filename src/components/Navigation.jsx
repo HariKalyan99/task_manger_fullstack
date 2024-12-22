@@ -47,7 +47,7 @@ const Navigation = () => {
               >
                 <li className="nav-item" onClick={() => switchBetween("home")}>
                   <Link
-                    to={"/mainpage.html"}
+                    to={"/dashboard"}
                     className={`nav-link text-white ${
                       getSwitch === "home" && "bg-dark"
                     }`}
@@ -58,7 +58,7 @@ const Navigation = () => {
                 </li>
                 <li onClick={() => switchBetween("createPost")}>
                   <Link
-                    to={"/mainpage.html/create-post"}
+                    to={"/create-task"}
                     className={`nav-link text-white ${
                       getSwitch === "createPost" && "bg-dark"
                     }`}
