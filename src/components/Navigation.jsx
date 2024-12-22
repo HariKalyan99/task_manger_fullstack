@@ -4,14 +4,14 @@ import logo from "../assets/tasklogo.svg";
 import { BlogStore } from "../store/Blogsstore";
 import { Link } from "react-router-dom";
 const Navigation = () => {
-  const { switchBetween, getSwitch } = useContext(BlogStore);
+  const { switchBetween, getSwitch, getToken } = useContext(BlogStore);
   return (
     <nav
-      className="navbar navbar-expand-md bg-dark sticky-top border-bottom"
+      className="navbar navbar-expand-md bg-black sticky-top border-bottom border-3 border-light"
       data-bs-theme="dark"
     >
       <div className="container-fluid">
-        <Link to={"/dashboard"} className="navbar-brand" >
+        <Link to={"/dashboard"} className="navbar-brand">
           <img src={logo} alt="" height={40} />
         </Link>
         <button
@@ -29,13 +29,12 @@ const Navigation = () => {
           tabIndex="-1"
           id="offcanvas"
           aria-labelledby="offcanvasLabel"
-          style={{width: "280px"}}
+          style={{ width: "280px" }}
         >
           <div className="offcanvas-header">
-            
             <Link to={"/dashboard"} className="navbar-brand" href="#">
-          <img src={logo} alt="" height={40} />
-        </Link>
+              <img src={logo} alt="" height={40} />
+            </Link>
             <button
               type="button"
               className="btn-close"
@@ -45,7 +44,7 @@ const Navigation = () => {
           </div>
           <div className="offcanvas-body">
             <ul className="navbar-nav flex-grow-1 justify-content-end">
-              <li className="nav-item" onClick={() => switchBetween("home")}>
+              {getToken && <li className="nav-item" onClick={() => switchBetween("home")}>
                 <Link
                   to={"/dashboard"}
                   className={`nav-link text-white ${
@@ -55,18 +54,19 @@ const Navigation = () => {
                 >
                   Dashboard
                 </Link>
-              </li>
-              <li onClick={() => switchBetween("createPost")}>
+              </li>}
+              {getToken && <li onClick={() => switchBetween("createPost")}>
                 <Link
                   to={"/create-task"}
                   className={`nav-link text-white ${
                     getSwitch === "createPost" && "bg-dark"
                   }`}
-                  aria-current="createPost"
+                  aria-current="createTask"
+                  
                 >
                   Create Task
                 </Link>
-              </li>
+              </li>}
             </ul>
           </div>
         </div>
