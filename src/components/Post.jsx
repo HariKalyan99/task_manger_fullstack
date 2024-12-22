@@ -3,7 +3,7 @@ import Editpost from "./Editpost";
 import { BlogStore } from "../store/Blogsstore";
 
 const Post = ({ post }) => {
-  const { delPost } = useContext(BlogStore);
+  const { delPost, editPost } = useContext(BlogStore);
   const [editPostActive, setEditPostActive] = useState(false);
   const convertDate = (date) => {
     return new Date(date).toDateString()
@@ -33,7 +33,7 @@ const Post = ({ post }) => {
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-star-fill"
+                  className="bi bi-star-fill"
                   viewBox="0 0 16 16"
                 >
                   <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
@@ -46,7 +46,7 @@ const Post = ({ post }) => {
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-star-half"
+                  className="bi bi-star-half"
                   viewBox="0 0 16 16"
                 >
                   <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z" />
@@ -59,7 +59,7 @@ const Post = ({ post }) => {
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-star"
+                  className="bi bi-star"
                   viewBox="0 0 16 16"
                 >
                   <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z" />
@@ -174,14 +174,21 @@ const Post = ({ post }) => {
             </svg>
 
             <div className="d-flex justify-content-center align-items-center gap-2">
-              <span>Mark as completed</span>
+              <span>{post.status === "completed" ? "Mark pending" : "Mark completed"}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
               height="25"
               fill="currentColor"
-              class="bi bi-marker-tip markPost"
+              className="bi bi-marker-tip markPost"
               viewBox="0 0 16 16"
+              onClick={() => {
+                if(post.status === "completed"){
+                  editPost({title: post.title,description: post.description, dueDate: post.dueDate, priority: post.priority, status: 'pending', taskId: post.id});
+                }else{
+                  editPost({title: post.title,description: post.description, dueDate: post.dueDate, priority: post.priority, status: 'completed', taskId: post.id})
+                }
+              }}
             >
               
               <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5 6.064-1.281-4.696A.5.5 0 0 0 9.736 9H6.264a.5.5 0 0 0-.483.368l-1.28 4.696A6.97 6.97 0 0 0 8 15c1.275 0 2.47-.34 3.5-.936m.873-.598a7 7 0 1 0-8.746 0l1.19-4.36a1.5 1.5 0 0 1 1.31-1.1l1.155-3.851c.213-.713 1.223-.713 1.436 0l1.156 3.851a1.5 1.5 0 0 1 1.31 1.1z" />

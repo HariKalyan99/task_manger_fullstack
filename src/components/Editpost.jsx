@@ -87,7 +87,7 @@ const Editpost = ({ setEditPostActive, editPostActive, edit, post }) => {
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-bookmark-star"
+                  className="bi bi-bookmark-star"
                   viewBox="0 0 16 16"
                 >
                   <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.18.18 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.18.18 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.18.18 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.18.18 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.18.18 0 0 0 .134-.098z" />
@@ -95,7 +95,7 @@ const Editpost = ({ setEditPostActive, editPostActive, edit, post }) => {
                 </svg>
               </span>
               <select
-                class="form-select"
+                className="form-select"
                 id="username"
                 aria-label="Default select example"
                 value={priorityRef}
@@ -122,7 +122,7 @@ const Editpost = ({ setEditPostActive, editPostActive, edit, post }) => {
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-bookmark-star"
+                  className="bi bi-bookmark-star"
                   viewBox="0 0 16 16"
                 >
                   <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.18.18 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.18.18 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.18.18 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.18.18 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.18.18 0 0 0 .134-.098z" />
@@ -130,7 +130,7 @@ const Editpost = ({ setEditPostActive, editPostActive, edit, post }) => {
                 </svg>
               </span>
               <select
-                class="form-select"
+                className="form-select"
                 id="username"
                 aria-label="Default select example"
                 value={statusRef}
@@ -156,7 +156,7 @@ const Editpost = ({ setEditPostActive, editPostActive, edit, post }) => {
                 width="16"
                 height="16"
                 fill="grey"
-                class="bi bi-calendar-check-fill"
+                className="bi bi-calendar-check-fill"
                 viewBox="0 0 16 16"
               >
                 <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708" />

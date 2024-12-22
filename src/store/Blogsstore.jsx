@@ -1,8 +1,6 @@
 import { createContext, useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-let token = JSON.parse(localStorage.getItem("user"));
-let user =  "hello"
 
 function pureReducerFunction(currentPostList, action) {
   let newPostList = currentPostList;
@@ -36,13 +34,21 @@ export const BlogStore = createContext({
   getSwitch: "",
   deletedPost: [],
   setDeletedPost: () => {},
+  loginUser: () => {},
+  saveUsers: () => {},
 });
 
 const BlogsStoreContextProvider = ({ children }) => {
-  const [getToken, setToken] = useState(token);
-  const [getUserName, setUserName] = useState(user);
+  const [getToken, setToken] = useState("");
+  const [getUserName, setUserName] = useState("");
+  const [postList, dispatchPostList] = useReducer(pureReducerFunction, []);
 
-  const [loading, setLoading] = useState(true);
+  const [getAddPost, setAddPost] = useState("");
+  const [getDelPost, setDelPost] = useState("");
+  const [getEditPost, setEditPost] = useState("");
+  const [deletedPost, setDeletedPost] = useState([]);
+
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -62,18 +68,13 @@ const BlogsStoreContextProvider = ({ children }) => {
     setSwitch(content);
   };
 
-  //reducer
-  const [postList, dispatchPostList] = useReducer(pureReducerFunction, []);
 
-  const [getAddPost, setAddPost] = useState("");
-  const [getDelPost, setDelPost] = useState("");
-  const [getEditPost, setEditPost] = useState("");
-  const [deletedPost, setDeletedPost] = useState([]);
+
 
   useEffect(() => {
     const fetchPosts = async () => {
-      setLoading(!loading);
       try {
+        setLoading(true);
         const { data } = await axios.get(
           "https://personal-task-manager-api-vu5e.onrender.com/api/v1/tasks",
           {
@@ -89,13 +90,15 @@ const BlogsStoreContextProvider = ({ children }) => {
             data: data.data,
           },
         });
-        setLoading(!loading);
+        setLoading(false);
       } catch (err) {
         console.log("Error", err);
       }
     };
-    fetchPosts();
-  }, []);
+    if(getToken?.length > 1){
+      fetchPosts();
+    }
+  }, [getToken]);
 
   useEffect(() => {
     const addPosts = async (task) => {
@@ -199,6 +202,62 @@ const BlogsStoreContextProvider = ({ children }) => {
     }
   }, [getEditPost]);
 
+  function loginUser(email, password) {
+    try {
+      fetch(
+        "https://personal-task-manager-api-vu5e.onrender.com/api/v1/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            password,
+            email,
+          }),
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ user: data.user, token: data.token })
+          );
+          let { user, token } = JSON.parse(localStorage.getItem("user"));
+          setToken(token);
+          setUserName(user);
+          navigate("/dashboard");
+        });
+    } catch (err) {
+      console.log("Error", err);
+    }
+  }
+  async function saveUsers(username, password, confirmPassword, email) {
+    if (username && password && confirmPassword && email) {
+      try {
+        const res = await fetch(
+          "https://personal-task-manager-api-vu5e.onrender.com/api/v1/auth/signup",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              username,
+              password,
+              confirmPassword,
+              email,
+            }),
+          }
+        );
+        const resJson = await res.json();
+        if (resJson.status === "Success") {
+          navigate("/login");
+        }
+      } catch (err) {
+        console.log("Error", err);
+      }
+    } else {
+      alert("Invalid username and password");
+    }
+  }
+
   const addPost = (task) => {
     setAddPost(task);
   };
@@ -225,23 +284,25 @@ const BlogsStoreContextProvider = ({ children }) => {
         getSwitch,
         deletedPost,
         setDeletedPost,
+        loginUser,
+        saveUsers,
       }}
     >
       {loading && (
         <div>
           <div
-            class="spinner-border"
+            className="spinner-border"
             style={{ width: "3rem", height: "3rem" }}
             role="status"
           >
-            <span class="visually-hidden">Loading...</span>
+            <span className="visually-hidden">Loading...</span>
           </div>
           <div
-            class="spinner-grow"
+            className="spinner-grow"
             style={{ width: "3rem", height: "3rem" }}
             role="status"
           >
-            <span class="visually-hidden">Loading...</span>
+            <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       )}

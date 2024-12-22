@@ -7,10 +7,13 @@ const Navigation = () => {
   const { switchBetween, getSwitch } = useContext(BlogStore);
   return (
     <nav
-      className="navbar navbar-expand-md bg-black sticky-top border-bottom flex justify-content-center border-2 border-white"
+      className="navbar navbar-expand-md bg-dark sticky-top border-bottom"
       data-bs-theme="dark"
     >
       <div className="container-fluid">
+        <Link to={"/dashboard"} className="navbar-brand" >
+          <img src={logo} alt="" height={40} />
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -26,8 +29,13 @@ const Navigation = () => {
           tabIndex="-1"
           id="offcanvas"
           aria-labelledby="offcanvasLabel"
+          style={{width: "280px"}}
         >
           <div className="offcanvas-header">
+            
+            <Link to={"/dashboard"} className="navbar-brand" href="#">
+          <img src={logo} alt="" height={40} />
+        </Link>
             <button
               type="button"
               className="btn-close"
@@ -35,40 +43,31 @@ const Navigation = () => {
               aria-label="Close"
             ></button>
           </div>
-
-          <div className="d-flex">
-            <div className="w-50">
-              <img src={logo} alt="logo" height={50} />
-            </div>
-            <div className="offcanvas-body nav-pills d-flex w-50 justify-content-end">
-              <ul
-                className="navbar-nav d-flex justify-content-end w-100 align-items-center"
-                style={{ gap: "2rem" }}
-              >
-                <li className="nav-item" onClick={() => switchBetween("home")}>
-                  <Link
-                    to={"/dashboard"}
-                    className={`nav-link text-white ${
-                      getSwitch === "home" && "bg-dark"
-                    }`}
-                    aria-current="home"
-                  >
-                    Dashboard
-                  </Link>
-                </li>
-                <li onClick={() => switchBetween("createPost")}>
-                  <Link
-                    to={"/create-task"}
-                    className={`nav-link text-white ${
-                      getSwitch === "createPost" && "bg-dark"
-                    }`}
-                    aria-current="createPost"
-                  >
-                    Create Task
-                  </Link>
-                </li>
-              </ul>
-            </div>
+          <div className="offcanvas-body">
+            <ul className="navbar-nav flex-grow-1 justify-content-end">
+              <li className="nav-item" onClick={() => switchBetween("home")}>
+                <Link
+                  to={"/dashboard"}
+                  className={`nav-link text-white ${
+                    getSwitch === "home" && "bg-dark"
+                  }`}
+                  aria-current="home"
+                >
+                  Dashboard
+                </Link>
+              </li>
+              <li onClick={() => switchBetween("createPost")}>
+                <Link
+                  to={"/create-task"}
+                  className={`nav-link text-white ${
+                    getSwitch === "createPost" && "bg-dark"
+                  }`}
+                  aria-current="createPost"
+                >
+                  Create Task
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -77,3 +76,33 @@ const Navigation = () => {
 };
 
 export default Navigation;
+
+{
+  /* <ul
+className="navbar-nav d-flex justify-content-end w-100 align-items-center"
+style={{ gap: "2rem" }}
+>
+<li className="nav-item" onClick={() => switchBetween("home")}>
+  <Link
+    to={"/dashboard"}
+    className={`nav-link text-white ${
+      getSwitch === "home" && "bg-dark"
+    }`}
+    aria-current="home"
+  >
+    Dashboard
+  </Link>
+</li>
+<li onClick={() => switchBetween("createPost")}>
+  <Link
+    to={"/create-task"}
+    className={`nav-link text-white ${
+      getSwitch === "createPost" && "bg-dark"
+    }`}
+    aria-current="createPost"
+  >
+    Create Task
+  </Link>
+</li>
+</ul> */
+}
