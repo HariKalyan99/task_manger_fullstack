@@ -7,14 +7,14 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Dashboard from './components/Dashboard.jsx';
 import Createpost from './components/Createpost.jsx';
 import App from './routes/App.jsx';
-import Recyclebin from './components/Recyclebin.jsx';
 
 const router = createBrowserRouter([
   {path: "/mainpage.html", element: <App />, children: [{
     path: "/mainpage.html", element: <Dashboard />
   }, {
     path: "/mainpage.html/create-post", element: <Createpost />
-  }, {path: "/mainpage.html/recycle-bin", element: <Recyclebin />}]}
+  }
+  ]}
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

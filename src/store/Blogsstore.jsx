@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useState,
-  useEffect,
-  useReducer,
-  useCallback,
-} from "react";
+import { createContext, useState, useEffect, useReducer } from "react";
 import axios from "axios";
 let { user, token } = JSON.parse(localStorage.getItem("user"));
 
@@ -20,18 +14,9 @@ function pureReducerFunction(currentPostList, action) {
     );
     newPostList = filteredDelPosts;
   } else if (action.type === "EDIT_POST") {
-    const newPosts = newPostList.filter((x) => x.id !== action.payload.Id);
-    newPostList = [
-      {
-        id: action.payload.data.id,
-        userId: action.payload.data.userId,
-        title: action.payload.data.title,
-        body: action.payload.data.body,
-        tags: action.payload.data.tags,
-        reactions: action.payload.data.reactions,
-      },
-      ...newPosts,
-    ];
+    const index = newPostList.findIndex((x) => x.id === action.payload.taskId);
+    newPostList.splice(index, 1, action.payload.data);
+    newPostList = [...newPostList];
   }
   return newPostList;
 }
@@ -84,8 +69,6 @@ const BlogsStoreContextProvider = ({ children }) => {
   const [deletedPost, setDeletedPost] = useState([]);
 
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
     const fetchPosts = async () => {
       setLoading(!loading);
       try {
@@ -98,15 +81,12 @@ const BlogsStoreContextProvider = ({ children }) => {
             },
           }
         );
-        useCallback(
-          dispatchPostList({
-            type: "INITIAL_POSTS",
-            payload: {
-              data: data.data,
-            },
-          }),
-          [dispatchPostList]
-        );
+        dispatchPostList({
+          type: "INITIAL_POSTS",
+          payload: {
+            data: data.data,
+          },
+        });
         setLoading(!loading);
       } catch (err) {
         console.log("Error", err);
@@ -131,15 +111,12 @@ const BlogsStoreContextProvider = ({ children }) => {
           }
         );
 
-        useCallback(
-          dispatchPostList({
-            type: "ADD_POST",
-            payload: {
-              data: data.data,
-            },
-          }),
-          [dispatchPostList]
-        );
+        dispatchPostList({
+          type: "ADD_POST",
+          payload: {
+            data: data.data,
+          },
+        });
       } catch (err) {
         console.log("Error", err);
       }
@@ -162,15 +139,12 @@ const BlogsStoreContextProvider = ({ children }) => {
           }
         );
         setDeletedPost([...deletedPost, data]);
-        useCallback(
-          dispatchPostList({
-            type: "DEL_POST",
-            payload: {
-              id,
-            },
-          }),
-          [dispatchPostList]
-        );
+        dispatchPostList({
+          type: "DEL_POST",
+          payload: {
+            id,
+          },
+        });
       } catch (err) {
         console.log("Error", err);
       }
@@ -181,39 +155,50 @@ const BlogsStoreContextProvider = ({ children }) => {
   }, [getDelPost]);
 
   useEffect(() => {
-    const editPosts = async ({ UserId, Title, Body, Tags, Reactions, Id }) => {
+    const editPosts = async ({
+      title,
+      description,
+      priority,
+      dueDate,
+      status,
+      taskId,
+    }) => {
       try {
-        const { data } = await axios.put(`http://localhost:8082/posts/${Id}`, {
-          id: Id,
-          title: Title,
-          body: Body,
-          userId: UserId,
-          tags: Tags,
-          reactions: Reactions,
-        });
-
-        useCallback(
-          dispatchPostList({
-            type: "EDIT_POST",
-            payload: {
-              data,
-              Id,
+        const { data } = await axios.put(
+          `https://personal-task-manager-api-vu5e.onrender.com/api/v1/tasks/${taskId}`,
+          {
+            title,
+            description,
+            priority,
+            dueDate,
+            status,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${getToken}`,
             },
-          }),
-          [dispatchPostList]
+          }
         );
+
+        dispatchPostList({
+          type: "EDIT_POST",
+          payload: {
+            data: data.data,
+            taskId,
+          },
+        });
       } catch (err) {
         console.log("Error", err);
       }
     };
-    if (getEditPost.Title) {
+    if (getEditPost?.title) {
       editPosts(getEditPost);
     }
   }, [getEditPost]);
 
   const addPost = (task) => {
     setAddPost(task);
-    // console.log(task)
   };
 
   const delPost = (id) => {

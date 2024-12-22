@@ -4,25 +4,24 @@ import { BlogStore } from "../store/Blogsstore";
 const Editpost = ({ setEditPostActive, editPostActive, edit, post }) => {
   const { editPost } = useContext(BlogStore);
 
-  const [previousUserId, setPreviousUserId] = useState(post.userId || "");
-  const [previousTitle, setPreviousTitle] = useState(post.title || "");
-  const [previousBody, setPreviousBody] = useState(post.body || "");
-  const [previousTags, setPreviousTags] = useState(post.tags || "");
-  const [previousReactions, setPreviousReactions] = useState(
-    post.reactions || ""
-  );
+  const [titleRef, settitleRef] = useState(post.title || "");
+    const [descriptionRef, setdescriptionRef] = useState(post.description || "");
+    const [priorityRef, setPriorityRef] = useState(post.priority || "");
+    const [dateRef, setdateRef] = useState("");
+    const [statusRef, setStatusRef] = useState(post.status || "");
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    const UserId = Number(previousUserId);
-    const Title = previousTitle;
-    const Body = previousBody;
-    const Tags = previousTags.split(",");
-    const Reactions = Number(previousReactions);
-    editPost({ UserId, Title, Body, Tags, Reactions, Id: post.id });
+    const title = titleRef;
+    const description = descriptionRef;
+    const priority = priorityRef;
+    const dueDate = dateRef;
+    const status = statusRef;
+    editPost({ title, description, priority, dueDate, status, taskId:post.id });
     setEditPostActive(!editPostActive);
   };
 
+ 
   if (edit) {
     return (
       <div className="col position-relative z-2">
@@ -36,123 +35,148 @@ const Editpost = ({ setEditPostActive, editPostActive, edit, post }) => {
           <div
             className="card-body"
             style={{
-              height: "650px",
+              height: "auto",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-around",
             }}
           >
-            <form
-              className="needs-validation"
-              onSubmit={(e) => handleEditSubmit(e)}
-            >
-              <div className="row ">
-                <div className="col-12">
-                  <label htmlFor="firstName" className="form-label">
-                    User Id
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="firstName"
-                    placeholder=""
-                    required=""
-                    value={previousUserId}
-                    onChange={(e) => setPreviousUserId(e.target.value)}
-                  />
-                  <div className="invalid-feedback">
-                    Valid first name is required.
-                  </div>
-                </div>
-
-                <div className="col-12">
-                  <label htmlFor="title" className="form-label">
-                    Title
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="title"
-                    required=""
-                    value={previousTitle}
-                    onChange={(e) => setPreviousTitle(e.target.value)}
-                  />
-                  <div className="invalid-feedback">
-                    Please enter your shipping title.
-                  </div>
-                </div>
-              </div>
-
-              <p> Body</p>
-
-              <div className="form-floating">
-                <textarea
-                  className="form-control"
-                  id="floatingTextarea2"
-                  style={{ height: "100px" }}
-                  value={previousBody}
-                  onChange={(e) => setPreviousBody(e.target.value)}
-                ></textarea>
-                <label htmlFor="floatingTextarea2"></label>
-              </div>
-
-              <div className="col-12">
-                <label htmlFor="username" className="form-label">
-                  Tags
-                </label>
-                <div className="input-group has-validation">
-                  <span className="input-group-text text-bg-dark">#</span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    placeholder="Tags"
-                    required=""
-                    value={previousTags}
-                    onChange={(e) => setPreviousTags(e.target.value)}
-                  />
-                  <div className="invalid-feedback">
-                    Tags must be entered with ','.
-                  </div>
-                </div>
-              </div>
-              <label htmlFor="username" className="form-label">
-                Reactions
+            <form className="needs-validation d-flex flex-column gap-2" onSubmit={(e) => handleEditSubmit(e)}>
+          <div className="row g-3">
+            <div className="col-12">
+              <label htmlFor="title" className="form-label">
+                Title
               </label>
-              <div className="input-group has-validation">
-                <span className="input-group-text text-bg-dark">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-chat-heart-fill"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9 9 0 0 0 8 15m0-9.007c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
-                  </svg>
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="username"
-                  placeholder="Reactions"
-                  required=""
-                  value={previousReactions}
-                  onChange={(e) => setPreviousReactions(e.target.value)}
-                />
-                <div className="invalid-feedback">
-                  Tags must be entered with ','.
-                </div>
-              </div>
-              <hr />
-              <button
-                className="w-100 btn btn-danger btn-lg mb-3"
-                type="submit"
+              <input
+                type="text"
+                className="form-control"
+                id="title"
+                required=""
+                value={titleRef}
+                onChange={(e) => settitleRef(e.target.value)}
+              />
+              <div className="invalid-feedback">Enter your task title.</div>
+            </div>
+          </div>
+
+          
+
+          <p> Description</p>
+
+          <div className="form-floating">
+            <textarea
+              className="form-control"
+              id="floatingTextarea2"
+              style={{ height: "100px" }}
+              value={descriptionRef}
+              onChange={(e) => setdescriptionRef(e.target.value)}
+            ></textarea>
+            <label htmlFor="floatingTextarea2"></label>
+          </div>
+
+          
+
+          <div className="col-8">
+            <label htmlFor="username" className="form-label">
+              Priority
+            </label>
+            <div className="input-group has-validation">
+              <span className="input-group-text text-bg-dark">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-bookmark-star"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.18.18 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.18.18 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.18.18 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.18.18 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.18.18 0 0 0 .134-.098z" />
+                  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                </svg>
+              </span>
+              <select
+                class="form-select"
+                id="username"
+                aria-label="Default select example"
+                value={priorityRef}
+                onChange={(e) => setPriorityRef(e.target.value)}
               >
-                Add Post
-              </button>
-            </form>
+                <option defaultValue hidden>
+                  Select the priority
+                </option>
+                <option value="low">low</option>
+                <option value="medium">medium</option>
+                <option value="high">high</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="col-8 mt-2">
+            <label htmlFor="username" className="form-label">
+              Status
+            </label>
+            <div className="input-group has-validation">
+              <span className="input-group-text text-bg-dark">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-bookmark-star"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.18.18 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.18.18 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.18.18 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.18.18 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.18.18 0 0 0 .134-.098z" />
+                  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                </svg>
+              </span>
+              <select
+                class="form-select"
+                id="username"
+                aria-label="Default select example"
+                value={statusRef}
+                onChange={(e) => setStatusRef(e.target.value)}
+              >
+                <option defaultValue hidden>
+                  Select status
+                </option>
+                <option value="pending">pending</option>
+                <option value="completed">completed</option>
+              </select>
+            </div>
+          </div>
+
+          
+          <label htmlFor="username" className="form-label">
+            Due on
+          </label>
+          <div className="input-group has-validation w-75">
+            <span className="input-group-text text-bg-dark">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="grey"
+                class="bi bi-calendar-check-fill"
+                viewBox="0 0 16 16"
+              >
+                <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+              </svg>
+            </span>
+            <input
+              type="date"
+              className="form-control bg-dark"
+              id="username"
+              required
+              value={dateRef}
+              onChange={(e) => setdateRef(e.target.value)}
+            />
+          </div>
+          
+          <button className="w-100 btn btn-danger btn-lg mb-3" type="submit">
+            Edit Task
+          </button>
+        </form>
+          
             {edit && (
               <button
                 className="w-100 btn btn-dark btn-lg mb-3"
@@ -170,3 +194,5 @@ const Editpost = ({ setEditPostActive, editPostActive, edit, post }) => {
 };
 
 export default Editpost;
+
+// onSubmit={(e) => handleEditSubmit(e)}

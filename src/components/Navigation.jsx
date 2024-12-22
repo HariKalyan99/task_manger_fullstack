@@ -67,20 +67,6 @@ const Navigation = () => {
                     Create Task
                   </Link>
                 </li>
-                <li
-                  className="nav-item"
-                  onClick={() => switchBetween("recycle")}
-                >
-                  <Link
-                    to={"/mainpage.html/recycle-bin"}
-                    className={`nav-link text-white ${
-                      getSwitch === "recycle" && "bg-dark"
-                    }`}
-                    aria-current="recylce"
-                  >
-                    Recycle bin
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>
