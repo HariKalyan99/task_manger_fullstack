@@ -5,10 +5,9 @@ import { BlogStore } from "../store/Blogsstore";
 import { useNavigate } from "react-router-dom";
 
 const Createpost = () => {
-  const {token} = JSON.parse(localStorage.getItem("user"));
+  const { token } = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   const { addPost, switchBetween } = useContext(BlogStore);
-  const [userIdRef, setuserIdRef] = useState("");
   const [titleRef, settitleRef] = useState("");
   const [descriptionRef, setdescriptionRef] = useState("");
   const [priorityRef, setPriorityRef] = useState("");
@@ -22,10 +21,9 @@ const Createpost = () => {
     const priority = priorityRef;
     const dueDate = dateRef;
     const status = statusRef;
-    console.log(title, description, priority,dueDate, status);
-    // addPost({ userId, title, description, tags, reactions, id: uuidv4() });
-    // navigate("/mainpage.html");
-    // switchBetween("home");
+    addPost({ title, description, priority, dueDate, status });
+    navigate("/mainpage.html");
+    switchBetween("home");
   };
   return (
     <div className="col g-5 d-flex bg-dark justify-content-center m-5 flex-wrap border border-5">
@@ -52,7 +50,7 @@ const Createpost = () => {
           </div>
 
           <hr className="my-4" />
-          
+
           <h4 className="mb-3"> Description</h4>
 
           <div className="form-floating">
@@ -74,12 +72,7 @@ const Createpost = () => {
               Priority
             </label>
             <div className="input-group has-validation">
-              <span
-                className="input-group-text text-bg-dark"
-                value={priorityRef}
-                onChange={(e) => setPriorityRef(e.target.value)}
-                readOnly={!token && true}
-              >
+              <span className="input-group-text text-bg-dark">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -96,6 +89,9 @@ const Createpost = () => {
                 class="form-select"
                 id="username"
                 aria-label="Default select example"
+                value={priorityRef}
+                onChange={(e) => setPriorityRef(e.target.value)}
+                readOnly={!token && true}
               >
                 <option defaultValue hidden>
                   Select the priority
@@ -104,35 +100,15 @@ const Createpost = () => {
                 <option value="medium">medium</option>
                 <option value="high">high</option>
               </select>
-
-              
-              {/* <input
-                  type="text"
-                  className="form-control"
-                  id="username"
-                  // placeholder={token ? "add comma after each tag" : "you don't have access"}
-                  required=""
-                  value={priorityRef}
-                  onChange={(e) => setPriorityRef(e.target.value)}
-                  readOnly={!token && true}
-                /> */}
-                
             </div>
-            
           </div>
-          
 
           <div className="col-4 mt-2">
             <label htmlFor="username" className="form-label">
-            Status
+              Status
             </label>
             <div className="input-group has-validation">
-              <span
-                className="input-group-text text-bg-dark"
-                value={statusRef}
-                onChange={(e) => setStatusRef(e.target.value)}
-                readOnly={!token && true}
-              >
+              <span className="input-group-text text-bg-dark">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -149,6 +125,9 @@ const Createpost = () => {
                 class="form-select"
                 id="username"
                 aria-label="Default select example"
+                value={statusRef}
+                onChange={(e) => setStatusRef(e.target.value)}
+                readOnly={!token && true}
               >
                 <option defaultValue hidden>
                   Select status
@@ -156,9 +135,7 @@ const Createpost = () => {
                 <option value="pending">pending</option>
                 <option value="completed">completed</option>
               </select>
-
             </div>
-            
           </div>
 
           <hr className="my-4" />
@@ -190,7 +167,6 @@ const Createpost = () => {
               onChange={(e) => setdateRef(e.target.value)}
               readOnly={!token && true}
             />
-            
           </div>
           <hr className="my-4" />
           <button className="w-100 btn btn-danger btn-lg mb-3" type="submit">
@@ -201,11 +177,11 @@ const Createpost = () => {
       <div className="container m-3" style={{ width: "600px" }}>
         <h1>Take a look!</h1>
         <Copypost
-          userId={userIdRef}
+          dueDate={dateRef}
           title={titleRef}
           description={descriptionRef}
-          tags={priorityRef}
-          reactions={dateRef}
+          priority={priorityRef}
+          status={statusRef}
         />
       </div>
     </div>

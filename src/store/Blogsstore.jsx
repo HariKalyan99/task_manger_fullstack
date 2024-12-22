@@ -1,23 +1,19 @@
-import { createContext, useState, useEffect, useReducer, useCallback } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+  useReducer,
+  useCallback,
+} from "react";
 import axios from "axios";
-let {user, token} = JSON.parse(localStorage.getItem("user"));
+let { user, token } = JSON.parse(localStorage.getItem("user"));
 
 function pureReducerFunction(currentPostList, action) {
   let newPostList = currentPostList;
   if (action.type === "INITIAL_POSTS") {
     newPostList = action.payload.data;
   } else if (action.type === "ADD_POST") {
-    newPostList = [
-      {
-        id: action.payload.id,
-        userId: action.payload.userId,
-        title: action.payload.title,
-        body: action.payload.body,
-        tags: action.payload.tags,
-        reactions: action.payload.reactions,
-      },
-      ...currentPostList,
-    ];
+    newPostList = [action.payload.data, ...currentPostList];
   } else if (action.type === "DEL_POST") {
     const filteredDelPosts = newPostList.filter(
       (x) => x.id !== action.payload.id
@@ -93,18 +89,24 @@ const BlogsStoreContextProvider = ({ children }) => {
     const fetchPosts = async () => {
       setLoading(!loading);
       try {
-        const { data } = await axios.get("https://personal-task-manager-api-vu5e.onrender.com/api/v1/tasks", {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${getToken}`
+        const { data } = await axios.get(
+          "https://personal-task-manager-api-vu5e.onrender.com/api/v1/tasks",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${getToken}`,
+            },
           }
-        });
-        useCallback(dispatchPostList({
-          type: "INITIAL_POSTS",
-          payload: {
-            data: data.data,
-          },
-        }), [dispatchPostList]);
+        );
+        useCallback(
+          dispatchPostList({
+            type: "INITIAL_POSTS",
+            payload: {
+              data: data.data,
+            },
+          }),
+          [dispatchPostList]
+        );
         setLoading(!loading);
       } catch (err) {
         console.log("Error", err);
@@ -114,33 +116,35 @@ const BlogsStoreContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const addPosts = async ({ userId, title, body, tags, reactions, id }) => {
+    const addPosts = async (task) => {
       try {
-        const { data } = await axios.post("http://localhost:8082/posts", {
-          id,
-          title,
-          body,
-          userId,
-          tags,
-          reactions,
-        });
-
-        useCallback(dispatchPostList({
-          type: "ADD_POST",
-          payload: {
-            id: data.id,
-            userId: data.userId,
-            title: data.title,
-            body: data.body,
-            tags: data.tags,
-            reactions: data.reactions,
+        const { data } = await axios.post(
+          "https://personal-task-manager-api-vu5e.onrender.com/api/v1/tasks",
+          {
+            ...task,
           },
-        }), [dispatchPostList]);
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${getToken}`,
+            },
+          }
+        );
+
+        useCallback(
+          dispatchPostList({
+            type: "ADD_POST",
+            payload: {
+              data: data.data,
+            },
+          }),
+          [dispatchPostList]
+        );
       } catch (err) {
         console.log("Error", err);
       }
     };
-    if (getAddPost.title) {
+    if (getAddPost?.title) {
       addPosts(getAddPost);
     }
   }, [getAddPost]);
@@ -148,19 +152,25 @@ const BlogsStoreContextProvider = ({ children }) => {
   useEffect(() => {
     const delPosts = async (id) => {
       try {
-        const {data} = await axios.delete(`https://personal-task-manager-api-vu5e.onrender.com/api/v1/tasks/${id}`,  {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${getToken}`
+        const { data } = await axios.delete(
+          `https://personal-task-manager-api-vu5e.onrender.com/api/v1/tasks/${id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${getToken}`,
+            },
           }
-        });
+        );
         setDeletedPost([...deletedPost, data]);
-        useCallback(dispatchPostList({
-          type: "DEL_POST",
-          payload: {
-            id
-          },
-        }), [dispatchPostList]);
+        useCallback(
+          dispatchPostList({
+            type: "DEL_POST",
+            payload: {
+              id,
+            },
+          }),
+          [dispatchPostList]
+        );
       } catch (err) {
         console.log("Error", err);
       }
@@ -182,13 +192,16 @@ const BlogsStoreContextProvider = ({ children }) => {
           reactions: Reactions,
         });
 
-        useCallback(dispatchPostList({
-          type: "EDIT_POST",
-          payload: {
-            data,
-            Id,
-          },
-        }), [dispatchPostList]);
+        useCallback(
+          dispatchPostList({
+            type: "EDIT_POST",
+            payload: {
+              data,
+              Id,
+            },
+          }),
+          [dispatchPostList]
+        );
       } catch (err) {
         console.log("Error", err);
       }
@@ -198,8 +211,9 @@ const BlogsStoreContextProvider = ({ children }) => {
     }
   }, [getEditPost]);
 
-  const addPost = (post) => {
-    setAddPost(post);
+  const addPost = (task) => {
+    setAddPost(task);
+    // console.log(task)
   };
 
   const delPost = (id) => {
@@ -223,7 +237,7 @@ const BlogsStoreContextProvider = ({ children }) => {
         handleLogout,
         getSwitch,
         deletedPost,
-        setDeletedPost
+        setDeletedPost,
       }}
     >
       {loading && (

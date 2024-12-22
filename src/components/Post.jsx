@@ -5,6 +5,9 @@ import { BlogStore } from "../store/Blogsstore";
 const Post = ({ post }) => {
   const { delPost } = useContext(BlogStore);
   const [editPostActive, setEditPostActive] = useState(false);
+  const convertDate = (date) => {
+    return new Date(date).toDateString()
+  }
   return (
     <div className="col">
       {editPostActive ? (
@@ -66,14 +69,14 @@ const Post = ({ post }) => {
           </span>
           <img
             src="https://www.socialchamp.io/wp-content/uploads/2022/06/Blog-Banner_Q2-2023_1125x600_39_How-to-Post-on-Pinterest-1.png"
-            alt={post.title}
-            className={post.status === "completed" && "img-eff"}
+            alt={post?.title}
+            className={post?.status === "completed" && "img-eff"}
           />
 
           <div
             className="card-body"
             style={{
-              height: "300px",
+              minHeight: "300px",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-around",
@@ -114,7 +117,7 @@ const Post = ({ post }) => {
               </span>
             </h4>
 
-            <p className="card-text">
+            <p className="card-text lh-sm">
               <h5
                 style={{
                   display: "inline-block",
@@ -124,7 +127,19 @@ const Post = ({ post }) => {
               >
                 Description:
               </h5>{" "}
-              {post.description}
+              {post?.description}
+            </p>
+            <p className="card-text">
+              <h5
+                style={{
+                  display: "inline-block",
+                  textDecoration: "underline",
+                  textDecorationColor: "grey",
+                }}
+              >
+                Due on:
+              </h5>{" "}
+              {convertDate(post?.dueDate)}
             </p>
             <div className="d-flex">
               <div className="d-flex gap-2 justify-content-center align-items-center">

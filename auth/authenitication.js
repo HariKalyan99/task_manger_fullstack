@@ -25,7 +25,6 @@ async function saveUsers(username, password, confirmPassword, email){
             })
         })
         const resJson = await res.json();
-        console.log(resJson.status)
         if(resJson.status === "Success"){
             window.location.href = 'login.html'
         }
