@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function pureReducerFunction(currentPostList, action) {
   let newPostList = currentPostList;
@@ -55,6 +56,7 @@ const BlogsStoreContextProvider = ({ children }) => {
     localStorage.clear();
     setToken("");
     setUserName("");
+    toast.success("Logged out successfully")
     navigate("/");
   };
 
@@ -84,13 +86,15 @@ const BlogsStoreContextProvider = ({ children }) => {
             },
           }
         );
-        dispatchPostList({
-          type: "INITIAL_POSTS",
-          payload: {
-            data: data.data,
-          },
-        });
-        setLoading(false);
+        if(data.status){
+          dispatchPostList({
+            type: "INITIAL_POSTS",
+            payload: {
+              data: data.data,
+            },
+          });
+          setLoading(false);
+        }
       } catch (err) {
         console.log("Error", err);
       }
@@ -116,13 +120,17 @@ const BlogsStoreContextProvider = ({ children }) => {
           }
         );
 
-        dispatchPostList({
-          type: "ADD_POST",
-          payload: {
-            data: data.data,
-          },
-        });
+        if(data.status){
+          toast.success(data.message);
+          dispatchPostList({
+            type: "ADD_POST",
+            payload: {
+              data: data.data,
+            },
+          });
+        }
       } catch (err) {
+        toast.error(err);
         console.log("Error", err);
       }
     };
@@ -143,14 +151,18 @@ const BlogsStoreContextProvider = ({ children }) => {
             },
           }
         );
-        setDeletedPost([...deletedPost, data]);
+        if(data.status){
+          toast.success(data.message);
+          setDeletedPost([...deletedPost, data]);
         dispatchPostList({
           type: "DEL_POST",
           payload: {
             id,
           },
         });
+        }
       } catch (err) {
+        toast.error(err);
         console.log("Error", err);
       }
     };
@@ -186,14 +198,18 @@ const BlogsStoreContextProvider = ({ children }) => {
           }
         );
 
-        dispatchPostList({
-          type: "EDIT_POST",
-          payload: {
-            data: data.data,
-            taskId,
-          },
-        });
+        if(data.status){
+          toast.success(data.message);
+          dispatchPostList({
+            type: "EDIT_POST",
+            payload: {
+              data: data.data,
+              taskId,
+            },
+          });
+        }
       } catch (err) {
+        toast.error(err);
         console.log("Error", err);
       }
     };
@@ -217,17 +233,20 @@ const BlogsStoreContextProvider = ({ children }) => {
       )
         .then((res) => res.json())
         .then((data) => {
-          localStorage.setItem(
-            "user",
-            JSON.stringify({ user: data.user, token: data.token })
-          );
-          let { user, token } = JSON.parse(localStorage.getItem("user"));
-          setToken(token);
-          setUserName(user);
-          navigate("/dashboard");
+          if(data.status){
+            toast.success(data.message);
+            localStorage.setItem(
+              "user",
+              JSON.stringify({ user: data.user, token: data.token })
+            );
+            let { user, token } = JSON.parse(localStorage.getItem("user"));
+            setToken(token);
+            setUserName(user);
+            navigate("/dashboard");
+          }
         });
     } catch (err) {
-      console.log("Error", err);
+      toast.error(err)
     }
   }
   async function saveUsers(username, password, confirmPassword, email) {
@@ -247,14 +266,18 @@ const BlogsStoreContextProvider = ({ children }) => {
           }
         );
         const resJson = await res.json();
-        if (resJson.status === "Success") {
+        if (resJson.status === "fail") {
+          toast.error(resJson.message);
+        }else{
+          toast.success(resJson.message);
           navigate("/login");
         }
       } catch (err) {
+        toast.error(err);
         console.log("Error", err);
       }
     } else {
-      alert("Invalid username and password");
+      toast.error("Invalid username and password");
     }
   }
 
