@@ -71,8 +71,6 @@ const BlogsStoreContextProvider = ({ children }) => {
   };
 
 
-
-
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -233,7 +231,7 @@ const BlogsStoreContextProvider = ({ children }) => {
       )
         .then((res) => res.json())
         .then((data) => {
-          if(data.status){
+          if(data.status === true){
             toast.success(data.message);
             localStorage.setItem(
               "user",
@@ -243,8 +241,11 @@ const BlogsStoreContextProvider = ({ children }) => {
             setToken(token);
             setUserName(user);
             navigate("/dashboard");
+          }else if(data.status === "fail"){
+            toast.error(data.message);
           }
-        });
+        }
+      );
     } catch (err) {
       toast.error(err)
     }
